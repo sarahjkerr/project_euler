@@ -7,7 +7,7 @@ def count_the_str_length(x):
     
     #Calculate one thousand
     if len(str(x)) == 4:
-        total_sum = len('One Thousand')
+        total_sum = len('OneThousand')
     
     #Calculate hundreds
     elif len(str(x)) == 3:
@@ -15,7 +15,7 @@ def count_the_str_length(x):
         #Calc the full hundreds
         if str(x)[1:] == '00':
             total_sum = len(ones_dict[str(x)[0]]) + 7
-    
+   
         #Calc the rest of the hundreds
         else:  
             #First digit
@@ -29,21 +29,24 @@ def count_the_str_length(x):
                 t = len(tens_dict[str(x)[1:]])
             
             else:
-                z = len(tens_dict[str(x)[1]])
-                o = len(ones_dict[str(x)[2]])
-                t = z + o
+                if str(x)[2] == '0':
+                    t = len(tens_dict[str(x)[1]])
+                else:
+                    z = len(tens_dict[str(x)[1]])
+                    o = len(ones_dict[str(x)[2]])
+                    t = z + o
             
             #Add them all together
             total_sum = r + t + 10
-    
-        return total_sum
-    
+      
     #Calculate the tens
     elif len(str(x)) == 2:
-        if str(x)[0] != '1':
+        if str(x)[0] != '1' and str(x)[1] != '0':
             g = len(tens_dict[str(x)[0]])
             w = len(ones_dict[str(x)[1]])
             total_sum = g + w
+        elif str(x)[0] != '1' and str(x)[1] == '0':
+            total_sum = len(tens_dict[str(x)[0]])
         else:
             total_sum = len(tens_dict[str(x)])
     
@@ -53,10 +56,11 @@ def count_the_str_length(x):
         
     return total_sum
   
-  num_length_list = []
+num_length_list = []
 
-for i in range(1,1000):
+for i in range(1,1001):
     h = count_the_str_length(i)
     num_length_list.append(h)
-    
-print(sum(num_length_list))
+  
+print(sum(num_length_list)
+#21124
