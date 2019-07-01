@@ -1,5 +1,3 @@
-#still troubleshooting- returning incorrect value
-
 temp_file = open('FILEPATH')
 names_list = temp_file.read().replace('"','').split(',')
 names_list.sort()
@@ -8,7 +6,7 @@ alpha_values = {'A':1,'B':2, 'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9,'J':10,'K
                'P':16,'Q':17,'R':18, 'S':19,'T':20,'U':21,'V':22,'W':23, 'X':24, 'Y':25, 'Z':26}
 
 def letter_val(name):
-    return sum([alpha_values[x] for x in name]) * names_list.index(name)
+    return sum([alpha_values[x] for x in name]) * (names_list.index(name) + 1)
     
 names_score_list =[]
 
