@@ -15,3 +15,4 @@ for item in names_list:
     names_score_list.append(value)
     
 print(sum(names_score_list))
+#871198282
