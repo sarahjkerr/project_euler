@@ -13,7 +13,7 @@ def find_factors(x):
     
     sqrt = int(x**(0.5))
     
-    for y in range(1,sqrt):
+    for y in range(2,sqrt):
         if (x % y) == 0:
             factors.append(y)
             
@@ -39,3 +39,30 @@ check_list(my_list)
 #486847 can be divided by 71
 #486847 can be divided by 6857*****
 #486847 can be divided by 486847
+
+"""Option 2: Still sort of brute force it, but with less redundancy 
+
+   Background: Check if every number less than the square root is a factor of 600851475143, starting at 2. If there's a remainder, 
+   advance one more digit and try again. If there's no remainder, change the value of x such that it's equal to the quotient of
+   x and g. If it's > 1, store it in the list along with g. Otherwise, just store g. At the very end, save this largest value 
+   in the factors list, and return the unique values from the list.
+   
+   
+def find_largest_factor(x):
+    g = 2
+    factors = []
+    
+    while g <= int(x**(0.5)):
+        if x % g:
+            g += 1
+        else:
+            x //= g
+            factors.append(g)
+        
+    if x > 1:
+        factors.append(x)
+    
+    return set(factors)
+
+find_largest_factor(600851475143)
+#6857
