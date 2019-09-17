@@ -45,7 +45,7 @@ check_list(my_list)
    Background: Check if every number less than the square root is a factor of 600851475143, starting at 2. If there's a remainder, 
    advance one more digit and try again. If there's no remainder, change the value of x such that it's equal to the quotient of
    x and g. If it's > 1, store it in the list along with g. Otherwise, just store g. At the very end, save this largest value 
-   in the factors list, and return the unique values from the list.
+   in the factors list, and return the unique values from the list."""
    
    
 def find_largest_factor(x):
