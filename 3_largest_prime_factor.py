@@ -65,4 +65,4 @@ def find_largest_factor(x):
     return set(factors)
 
 find_largest_factor(600851475143)
-#6857
+#{71, 839, 1471, 6857}
