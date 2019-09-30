@@ -32,7 +32,7 @@ class Grid:
         return result
         
     def output(self):
-        print("The number of routes for a " , new_grid.sides, " by " , new_grid.sides, " grid is: ", new_grid.calculate())
+        print("The number of routes for a " , new_grid.sides, " by " , new_grid.sides, " grid is: ", new_grid.calculate_routes())
         
 new_grid = Grid(20)
 new_grid.output()
