@@ -1,66 +1,53 @@
-ones_dict ={'0':'Zero', '1':'One', '2':'Two', '3':'Three', '4':'Four', '5':'Five', '6':'Six', '7':'Seven', '8':'Eight', '9':'Nine'}
-tens_dict = {'10':'Ten', '11':'Eleven', '12':'Twelve', '13':'Thirteen', '14':'Fourteen', '15':'Fifteen', '16':'Sixteen', 
-             '17':'Seventeen', '18':'Eighteen', '19':'Nineteen','2':'Twenty', '3':'Thirty', '4':'Forty', '5':'Fifty', 
-             '6':'Sixty', '7':'Seventy', '8':'Eighty', '9':'Ninety'}
+ones_dict ={'1':'one', '2':'two', '3':'three', '4':'four', '5':'five', '6':'six', 
+            '7':'seven', '8':'eight', '9':'nine'}
 
-def count_the_str_length(x):
-    
-    #Calculate one thousand
-    if len(str(x)) == 4:
-        total_sum = len('OneThousand')
-    
-    #Calculate hundreds
-    elif len(str(x)) == 3:
-        
-        #Calc the full hundreds
-        if str(x)[1:] == '00':
-            total_sum = len(ones_dict[str(x)[0]]) + 7
-   
-        #Calc the rest of the hundreds
-        else:  
-            #First digit
-            r = len(ones_dict[str(x)[0]])
-        
-            #Second and third digits
-            if str(x)[1] == '0':
-                t = len(ones_dict[str(x)[2]])
+tens_dict = {'1':'ten', '11':'eleven', '12':'twelve', '13':'thirteen', '14':'fourteen', '15':'fifteen', '16':'sixteen', 
+             '17':'seventeen', '18':'eighteen', '19':'nineteen', '2':'twenty', '3':'thirty', '4':'forty', '5':'fifty', 
+             '6':'sixty', '7':'seventy', '8':'eighty', '9':'ninety'}
 
-            elif str(x)[1] == '1':
-                t = len(tens_dict[str(x)[1:]])
-            
-            else:
-                if str(x)[2] == '0':
-                    t = len(tens_dict[str(x)[1]])
-                else:
-                    z = len(tens_dict[str(x)[1]])
-                    o = len(ones_dict[str(x)[2]])
-                    t = z + o
-            
-            #Add them all together
-            total_sum = r + t + 10
-      
-    #Calculate the tens
-    elif len(str(x)) == 2:
-        if str(x)[0] != '1' and str(x)[1] != '0':
-            g = len(tens_dict[str(x)[0]])
-            w = len(ones_dict[str(x)[1]])
-            total_sum = g + w
-        elif str(x)[0] != '1' and str(x)[1] == '0':
-            total_sum = len(tens_dict[str(x)[0]])
-        else:
-            total_sum = len(tens_dict[str(x)])
-    
-    #Calculate the ones
+def stringify_ones(x):
+    return ones_dict[x]
+
+def stringify_tens(x):
+    if x == '10':
+        return 'ten'
+    elif x[0] == '1':
+        return tens_dict[x]
+    elif x[1] == '0':
+        return tens_dict[x[0]]
     else:
-        total_sum = len(ones_dict[str(x)])
-        
-    return total_sum
-  
-num_length_list = []
+        return tens_dict[x[0]] + ones_dict[x[1]]
 
-for i in range(1,1001):
-    h = count_the_str_length(i)
-    num_length_list.append(h)
+def stringify_hundreds(x):
+    if x[1:] == '00':
+        return ones_dict[x[0]] + 'hundred'
+    elif x[1] == '0' and x[2] != 0:
+        return ones_dict[x[0]] + 'hundredAnd' + ones_dict[x[2]]
+    else:
+        return ones_dict[x[0]] + 'hundredAnd' + stringify_tens(x[1:])
+
+def stringify_number(x):
+    
+    num_string = str(x)
+    
+    if len(num_string) == 3:
+        stringed_num = stringify_hundreds(num_string)
+    elif len(num_string) == 2:
+        stringed_num = stringify_tens(num_string)
+    else:
+        stringed_num = stringify_ones(num_string)
+    return stringed_num
+
+def calc_num_str_len(x):    
+    if len(str(x)) == 4:
+        num_length = len('oneThousand')
+    else:
+        num_length = len(stringify_number(x))
+    return num_length
   
-print(sum(num_length_list)
-#21124
+base_num = 0
+
+for x in range(1,1001):
+    base_num += calc_num_str_len(x)
+
+print(base_num)
